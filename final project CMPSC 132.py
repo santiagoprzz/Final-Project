@@ -1,5 +1,8 @@
 import random
 
+#Track the high score depending on difficulty
+high_scores = {"easy": None, "medium": None, "hard": None}
+
 def proximity_hint(guess,number):   #Function that takes two arguments and selects which hints to give out
     distance= abs(guess -number)
     if distance<= 4:
@@ -49,6 +52,7 @@ while GUESSED is not True and (max_attempts is None or attempts < max_attempts):
         else:
             proximity_hint(guess, number)
         
+        #Win condition
         if guess==number:     
             GUESSED = True
             print("CONGRATS you guessed correctly!!!!!!")
@@ -57,3 +61,10 @@ while GUESSED is not True and (max_attempts is None or attempts < max_attempts):
     
 if GUESSED is not True:
     print(f"GAME OVER!! Correct answer was: {number}")
+
+#High score conditional statements
+if GUESSED is True:
+    if high_scores[choose_difficulty] is None or attempts< high_scores[choose_difficulty]:
+        high_scores[choose_difficulty]= attempts
+        print("Nice! New high score!")
+        print(f"Your best score for {choose_difficulty} difficulty is: {high_scores[choose_difficulty]}")
